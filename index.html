@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>黑木陶藝工作室｜首頁</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem 2rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+    nav {
+      background: #444;
+      padding: 0.3rem 2rem;
+    }
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      margin-right: 1rem;
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem 2rem 2.5rem;
+    }
+    h2 {
+      border-left: 4px solid #333;
+      padding-left: 0.5rem;
+      margin-top: 2rem;
+    }
+    .home-intro p {
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem;
+      background: #fafafa;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+      max-height: 200px;
+    }
+    .product-card h3 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 1.05rem;
+    }
+    .price {
+      color: #b35c00;
+      font-weight: bold;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 350px;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>黑木陶藝工作室</h1>
+</header>
+
+<nav>
+  <a href="index.html">首頁</a>
+  <a href="gallery.html">作品集</a>
+  <a href="cart.html">購物車</a>
+  <a href="about.html">介紹</a>
+</nav>
+
+<main>
+  <!-- 區塊 1：首頁簡介 -->
+  <section id="home-intro" class="home-intro">
+    <h2>首頁</h2>
+    <p>
+      歡迎來到黑木陶藝工作室。這裡以手作器物為主，每件作品皆在多次試燒之後，
+      保留泥土的質感與釉色的層次，適合日常使用，也適合作為禮物。
+    </p>
+  </section>
+
+  <!-- 區塊 2：商品預覽 -->
+  <section id="productsPreview">
+    <h2>精選作品預覽</h2>
+    <div class="products">
+      <article class="product-card">
+        <img src="images/青瓷茶葉罐.jpg" alt="青瓷茶葉罐">
+        <h3>青瓷茶葉罐</h3>
+        <p>大容量裝，色澤典雅。</p>
+        <p class="price">NT$ 2800</p>
+      </article>
+
+      <article class="product-card">
+        <img src="images/柴燒茶具組.jpg" alt="柴燒茶具組">
+        <h3>柴燒茶具組</h3>
+        <p>天然柴燒，自然成色。</p>
+        <p class="price">NT$ 3000</p>
+      </article>
+    </div>
+    <p style="margin-top:1rem;">
+      想要選購或下單，請點選上方「購物車」標籤，進入購物頁面。
+    </p>
+  </section>
+
+  <!-- 區塊 3：店家資訊（首頁最下方） -->
+  <section id="storeSection">
+    <h2>商店位置</h2>
+    <p>地址：彰化縣花壇鄉車路街225號</p>
+    <p>營業時間:</p>
+    <p>週一至週五 10:00–16:00
+    <p>週六採預約制</p>
+    <p>電話：0928-338059</p>
+
+    <div class="map-container" style="margin-top:10px;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.5567321916433!2d120.55099271114204!3d24.011425178615315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469378d062443a5%3A0xea4c826511fc8106!2zNTAz5b2w5YyW57ij6Iqx5aOH6YSJ6LuK6Lev6KGXMjI16Jmf!5e0!3m2!1szh-TW!2stw!4v1763600355638!5m2!1szh-TW!2stw"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

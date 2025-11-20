@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>黑木陶藝工作室｜購物車</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem 2rem;
+    }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    nav {
+      background: #444;
+      padding: 0.3rem 2rem;
+    }
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      margin-right: 1rem;
+      font-size: 0.95rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    main {
+      padding: 1.5rem 2rem 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+    }
+    h2 {
+      border-left: 4px solid #333;
+      padding-left: 0.5rem;
+      margin-top: 2rem;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem;
+      background: #fafafa;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+      max-height: 200px;
+    }
+    .product-card h3 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 1.05rem;
+    }
+    .price {
+      color: #b35c00;
+      font-weight: bold;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-card button {
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: none;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+    .product-card button:hover { opacity: 0.85; }
+    #cartTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    #cartTable th, #cartTable td {
+      border: 1px solid #ddd;
+      padding: 0.4rem 0.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    #cartTotalRow {
+      font-weight: bold;
+      text-align: right;
+    }
+    form label {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      margin-top: 0.2rem;
+      box-sizing: border-box;
+    }
+    form button[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      background: #0066cc;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    form button[type="submit"]:hover { opacity: 0.9; }
+    .hint {
+      font-size: 0.8rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>黑木陶藝工作室</h1>
+</header>
+
+<nav>
+  <a href="index.html">首頁</a>
+  <a href="gallery.html">作品集</a>
+  <a href="cart.html">購物車</a>
+  <a href="about.html">介紹</a>
+</nav>
+
+<main>
+  <!-- 商品展示區 -->
+  <section id="productsSection">
+    <h2>陶藝作品</h2>
+    <div class="products">
+      <article class="product-card">
+        <img src="images/青瓷茶葉罐.jpg" alt="青瓷茶葉罐">
+        <h3>青瓷茶葉罐</h3>
+        <p>大容量裝，色澤典雅。</p>
+        <p class="price">NT$ 2800</p>
+        <label>數量
+          <input type="number" min="1" value="1" data-product-id="P001">
+        </label>
+        <button onclick="addToCart('P001','青瓷茶葉罐',2800)">加入購物車</button>
+      </article>
+
+      <article class="product-card">
+        <img src="images/柴燒茶具組.jpg" alt="柴燒茶具組">
+        <h3>柴燒茶具組</h3>
+        <p>天然柴燒，自然成色。</p>
+        <p class="price">NT$ 3000</p>
+        <label>數量
+          <input type="number" min="1" value="1" data-product-id="P002">
+        </label>
+        <button onclick="addToCart('P002','柴燒茶具組',3000)">加入購物車</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- 購物車區 -->
+  <section id="cartSection">
+    <h2>購物車</h2>
+    <p class="hint">加入商品後會顯示在這裡。</p>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>商品名稱</th>
+          <th>單價</th>
+          <th>數量</th>
+          <th>小計</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="cartBody"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" id="cartTotalRow">總金額</td>
+          <td id="cartTotal">0</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- 訂單表單區 -->
+  <section id="orderSection">
+    <h2>填寫訂單資料</h2>
+    <form id="orderForm">
+      <label>姓名
+        <input type="text" name="customerName" required>
+      </label>
+      <label>聯絡電話
+        <input type="tel" name="phone" required>
+      </label>
+      <label>Email
+        <input type="email" name="email">
+      </label>
+      <label>收件地址
+        <input type="text" name="address" required>
+      </label>
+      <label>付款方式
+        <select name="paymentMethod">
+          <option value="bank">銀行轉帳</option>
+          <option value="cod">貨到付款</option>
+        </select>
+      </label>
+      <label>備註
+        <textarea name="note" rows="3"></textarea>
+      </label>
+
+      <input type="hidden" name="cartJson" id="cartJson">
+
+      <button type="submit">送出訂單</button>
+      <p class="hint">目前為示範模式，會在主控台顯示要送出的資料，之後可改成連結 Google Sheet。</p>
+    </form>
+  </section>
+</main>
+
+<script>
+  let cart = [];
+
+  function addToCart(id, name, price) {
+    const qtyInput = document.querySelector('input[data-product-id="' + id + '"]');
+    const qty = parseInt(qtyInput.value, 10) || 1;
+
+    const existing = cart.find(item => item.id === id);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ id, name, price, qty });
+    }
+    renderCart();
+  }
+
+  function renderCart() {
+    const tbody = document.getElementById('cartBody');
+    tbody.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const subTotal = item.price * item.qty;
+      total += subTotal;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${item.name}</td>
+        <td>NT$ ${item.price}</td>
+        <td>
+          <input type="number" min="1" value="${item.qty}" data-cart-index="${index}" style="width:60px">
+        </td>
+        <td>NT$ ${subTotal}</td>
+        <td><button type="button" onclick="removeFromCart(${index})">移除</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('cartTotal').textContent = 'NT$ ' + total;
+    bindQtyChangeEvents();
+  }
+
+  function bindQtyChangeEvents() {
+    const inputs = document.querySelectorAll('input[data-cart-index]');
+    inputs.forEach(input => {
+      input.addEventListener('change', (e) => {
+        const index = parseInt(e.target.getAttribute('data-cart-index'), 10);
+        const newQty = parseInt(e.target.value, 10) || 1;
+        cart[index].qty = newQty;
+        renderCart();
+      });
+    });
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  document.getElementById('orderForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (cart.length === 0) {
+      alert('購物車是空的，請先選擇商品');
+      return;
+    }
+    document.getElementById('cartJson').value = JSON.stringify(cart);
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log('要送出的資料:', data);
+    alert('示範模式：訂單資料已輸出到主控台。');
+  });
+</script>
+</body>
+</html>
